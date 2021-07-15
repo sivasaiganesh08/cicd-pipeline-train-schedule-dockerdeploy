@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent slave1
     stages {
         stage('Build') {
             steps {
@@ -27,7 +27,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker_login') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
